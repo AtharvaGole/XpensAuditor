@@ -28,16 +28,20 @@ public class ListGroupMembersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_group_members);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("XpensAuditor");
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        toolbar.setTitle("XpensAuditor");
+//        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),AddMemberToGroupActivity.class);
-                startActivity(i);
+                try {
+                    Intent i = new Intent(getApplicationContext(), AddMemberToGroupActivity.class);
+                    startActivity(i);
+                } catch(Exception e) {
+                    System.out.println("Error: " + e.toString());
+                }
             }
         });
 
@@ -115,7 +119,8 @@ class GroupMembersAdaptor implements ListAdapter {
 
         textViewName.setText(names.get(position));
         textViewEmail.setText(emailIds.get(position));
-        imageFlag.setImageResource(R.drawable.ic_action_group_member_item);
+
+//        imageFlag.setImageResource(R.drawable.ic_action_group_member_item);
         return  row;
     }
 

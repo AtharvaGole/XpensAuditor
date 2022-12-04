@@ -1,17 +1,8 @@
 package com.xa.xpensauditor;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -23,10 +14,9 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -36,15 +26,13 @@ import androidx.core.view.GravityCompat;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+//import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import com.xa.xpensauditor.databinding.ActivityHomeBinding;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
 
 public class GroupActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,7 +40,7 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+//    private ViewPager viewPager;
     FirebaseAuth auth;
     ImageView userImage;
 
@@ -71,7 +59,7 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_group);
         Intent intent = getIntent();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -84,11 +72,11 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
         Firebase.setAndroidContext(this);
         mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
@@ -98,25 +86,25 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         RefName = RefUid.child("Group Name");
 
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
-        View navHeaderView =  navigationView.getHeaderView(0);
-        tvHeaderName = (TextView)navHeaderView.findViewById(R.id.headerName);
-        tvHeaderMail = (TextView)navHeaderView.findViewById(R.id.headerEmail);
-        userImage = (ImageView)navHeaderView.findViewById(R.id.imageView);
-
-        navigationView.setNavigationItemSelectedListener(this);
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//
+//        View navHeaderView =  navigationView.getHeaderView(0);
+//        tvHeaderName = (TextView)navHeaderView.findViewById(R.id.headerName);
+//        tvHeaderMail = (TextView)navHeaderView.findViewById(R.id.headerEmail);
+//        userImage = (ImageView)navHeaderView.findViewById(R.id.imageView);
+//
+//        navigationView.setNavigationItemSelectedListener(this);
 
 
         RefName.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                try {
-                    tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
             }
 
@@ -126,53 +114,53 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
             }
         });
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        viewPager.setCurrentItem(currentpage);
+//        viewPager = (ViewPager) findViewById(R.id.viewpager);
+//        setupViewPager(viewPager);
+//        viewPager.setCurrentItem(currentpage);
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if(position==0)
-                {
-                    currentpage=0;
-                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
-                    startActivity(intent);
-                }
-                if(position==1)
-                {
-                    currentpage=1;
-                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
-                    startActivity(intent);
-
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                if(position==0)
+//                {
+//                    currentpage=0;
+//                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+//                    startActivity(intent);
+//                }
+//                if(position==1)
+//                {
+//                    currentpage=1;
+//                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+//                    startActivity(intent);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
+//
 
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-
-        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
-        Bundle bundle = new Bundle();
-        bundle.putString("group_key", getIntent().getExtras().getString("group_key"));
-        TabFragment fragobj = new TabFragment();
-        fragobj.setArguments(bundle);
-        adapter.addFragment(fragobj,"ALL TRANSACTION");
-        viewPager.setAdapter(adapter);
-    }
+//    private void setupViewPager(ViewPager viewPager) {
+//
+//        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
+//        Bundle bundle = new Bundle();
+//        bundle.putString("group_key", getIntent().getExtras().getString("group_key"));
+//        AllTransactionsFragment fragobj = new AllTransactionsFragment();
+//        fragobj.setArguments(bundle);
+//        adapter.addFragment(fragobj,"ALL TRANSACTION");
+//        viewPager.setAdapter(adapter);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -198,11 +186,13 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         else if (id == R.id.add_people_to_group) {
 
             Intent i=new Intent(this,AddMemberToGroupActivity.class);
+            i.putExtra("group_key", Uid);
             startActivity(i);
         }
         else if(id== R.id.leave_group)
         {
 //            TODO: Remove the user from the current group and redirect to home page
+
             Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
         }
 
@@ -211,12 +201,13 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        super.onBackPressed();
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
     }
 
 
@@ -227,5 +218,34 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
 
     public String getGroupName() {
         return getIntent().getExtras().getString("group_key");
+    }
+
+    public void leaveGroup(){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.get().addOnCompleteListener(new OnCompleteListener<com.google.firebase.database.DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<com.google.firebase.database.DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Toast.makeText(GroupActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_LONG).show();
+                }
+//                else {
+//                    RefNewGroup = mRootRef.child(Uid);
+//                    RefMemberCount = RefNewGroup.child("Member Count");
+//                    String currentMemberCount = task.getResult().child(groupName).child("Member Count").getValue().toString();
+//                    String newMemberCount = Integer.toString(Integer.parseInt(currentMemberCount)+1);
+//                    Toast.makeText(AddMemberToGroupActivity.this, newMemberCount, Toast.LENGTH_LONG).show();
+//                    mDatabase.child(groupName).child("Member Count").setValue(newMemberCount);
+//
+//
+//                    RefNewUserEmailAddedToNewGroup = RefNewGroup.child("GroupMembers").push();
+//                    RefNewUserEmailAddedToNewGroup.setValue(userEmailsAddedToGroup);
+//
+//                    Intent i = new Intent(AddMemberToGroupActivity.this, GroupListActivity.class);
+//                    startActivity(i);
+//                }
+            }
+
+        });
     }
 }

@@ -22,14 +22,14 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Amount in $"
+                android:hint="@string/amount_in"
                 android:inputType="numberDecimal"
                 android:id="@+id/addTransAmt"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Shop Name"
+                android:hint="Memo"
                 android:id="@+id/addShopName" />
 
             <TextView
