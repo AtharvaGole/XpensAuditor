@@ -25,6 +25,18 @@ a smart way to track your expenses
  - Profile set up module is where user can update their details 
  - Account Settings are available to change password, send password reset email
 
+## New Features
+Features : 
+
+-Added new feature to create groups
+-Added new option that generates analytics for Group as well as personal transactions
+-Scalablility increased drastically *(with firebase premium More groups can be formed in premium firebase)*
+-All transactions added can now be filtered by category  
+-Added "Sort by date" and "Sort by price" features in transactions
+-Now supports multiple users
+-Added push notifications with which all group members are notified each time a transaction is added
+-The app now stores data of transactions of previous months as well
+
 ## Demo
 
 https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b-9a86-559b14adf898.mp4
