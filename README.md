@@ -42,6 +42,18 @@ a smart way to track your expenses
  - UI refresh
  
 
+## New Features
+Features : 
+
+-Added new feature to create groups
+-Added new option that generates analytics for Group as well as personal transactions
+-Scalablility increased drastically *(with firebase premium More groups can be formed in premium firebase)*
+-All transactions added can now be filtered by category  
+-Added "Sort by date" and "Sort by price" features in transactions
+-Now supports multiple users
+-Added push notifications with which all group members are notified each time a transaction is added
+-The app now stores data of transactions of previous months as well
+
 ## Demo
 
 [Link to Demo Video](https://drive.google.com/file/d/1uOYYxBSlLLNwlBKz2-shEShyU4YVj-L6/view?usp=sharing)
